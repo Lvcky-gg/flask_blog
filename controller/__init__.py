@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
+from model import db
 # from .seeds import seed_commands
 from .config import Config
 
@@ -18,9 +19,13 @@ def create_app():
     # @login.user_loader
     # def load_user(id):
     #     return User.query.get(int(id))
-    # # app.cli.add_command(seed_commands)
+    # app.cli.add_command(seed_commands)
+
 
     app.config.from_object(Config)
+
+    db.init_app(app)
+    Migrate(app, db)
 
     flask_env = os.environ.get("FLASK_ENV")
     if flask_env == "development":
@@ -58,6 +63,7 @@ def create_app():
 
 
 app = create_app()
+
 
 @app.route("/api/docs")
 def api_help():
