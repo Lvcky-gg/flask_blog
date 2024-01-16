@@ -10,7 +10,7 @@ from .config import Config
 
 
 def create_app():
-    app = Flask(__name__, static_folder="../../frontend/build", static_url_path="/")
+    app = Flask(__name__, static_folder="../view/frontend/build", static_url_path="/")
 
 
     login = LoginManager(app)
