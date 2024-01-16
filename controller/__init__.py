@@ -36,7 +36,7 @@ def create_app():
         )
     elif flask_env == "production":
         CORS(
-            app, origins="https://pet-overload.onrender.com/", supports_credentials=True
+            app, origins="https://blog.johnodonnell.xyz/", supports_credentials=True
         )
 
     @app.before_request
