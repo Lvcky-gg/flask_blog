@@ -7,7 +7,7 @@ from flask_login import LoginManager
 from model import db
 # from .seeds import seed_commands
 from .config import Config
-from .routes import auth_routes
+from .routes.auth_routes import auth_routes
 
 
 def create_app():
@@ -22,7 +22,7 @@ def create_app():
     #     return User.query.get(int(id))
     # app.cli.add_command(seed_commands)
     app.config.from_object(Config)
-    app.register_blueprint(auth_routes, url_prefix="api/auth")
+    app.register_blueprint(auth_routes, url_prefix="/api/auth")
 
     db.init_app(app)
     Migrate(app, db)
