@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-from model import db
+from model import db, User
 # from .seeds import seed_commands
 from .config import Config
 from .routes.auth_routes import auth_routes
@@ -17,9 +17,9 @@ def create_app():
     login = LoginManager(app)
     login.login_view = "auth.unauthorized"
 
-    # @login.user_loader
-    # def load_user(id):
-    #     return User.query.get(int(id))
+    @login.user_loader
+    def load_user(id):
+        return User.query.get(int(id))
     # app.cli.add_command(seed_commands)
     app.config.from_object(Config)
     app.register_blueprint(auth_routes, url_prefix="/api/auth")

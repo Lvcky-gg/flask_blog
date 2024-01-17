@@ -1,5 +1,5 @@
 Pipfile
-.venv
+.venv/
 .env
 .flaskenv
 
