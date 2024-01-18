@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 from model import db, User
-# from .seeds import seed_commands
+from seeds import seed_commands
 from .config import Config
 from .routes.auth_routes import auth_routes
 from .routes.post_routes import post_routes_blueprint
@@ -21,7 +21,7 @@ def create_app():
     @login.user_loader
     def load_user(id):
         return User.query.get(int(id))
-    # app.cli.add_command(seed_commands)
+    app.cli.add_command(seed_commands)
     app.config.from_object(Config)
     app.register_blueprint(auth_routes, url_prefix="/api/auth")
     app.register_blueprint(post_routes_blueprint, url_prefix="/api/posts")
