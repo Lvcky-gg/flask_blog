@@ -65,9 +65,20 @@ def modify_post(id):
     todo
     """
 
-# @post_routes_blueprint.route("/", methods=["POST"])
-# @login_required
-# def create_post():
-    """
-    todo
-    """
+@post_routes_blueprint.route("/", methods=["POST"])
+@login_required
+def create_post():
+    try:
+        if request.json != "":
+            post = Post(
+                user_id=int(session["__user_id"]),
+                title = request.json.get("title"),
+                body = request.json.get("body"),
+                created_at = datetime.now(),
+                updated_at = datetime.now(),
+            )
+            db.session.add(post)
+            db.session.commit()
+            return post.to_dict()
+    except BaseException as e:
+        return handle_error(e)
