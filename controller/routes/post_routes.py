@@ -38,9 +38,29 @@ def get_by_id(id):
             jsonify({"message":"Error: No Post Located", "status":"404"}, 404)
         )    
 
-# @post_routes_blueprint.route("/<int:id>", methods=["PUT"])
-# @login_required
-# def modify_post(vote_id):
+@post_routes_blueprint.route("/<int:id>", methods=["PUT"])
+@login_required
+def modify_post(vote_id):
+    try:
+        post = Post.query.get(id)
+    except BaseException as e:
+        return handle_error(e)
+    if post:
+        if int(post.user.id) == int(session["__user_id"]):
+            # come look at this later
+            post.title = request.json
+            post.body = request.json
+            db.session.commit()
+            return jsonify(post.to_dict(), 200)
+        else:
+            return jsonify({"message":"Unauthorized User", "status":"403"},403)
+    else:
+        return jsonify({"message":"Post could not be found", "status code":404},404)
+
+
+
+
+
     """
     todo
     """
