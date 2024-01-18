@@ -25,11 +25,19 @@ def get_all_posts():
             jsonify({"message":"Error: No Posts Located", "status":"404"}, 404)
         )
     
-# @post_routes_blueprint.route("/<int:id>", methods=["GET"])
-# def get_by_id(id):
-    """
-    todo
-    """
+@post_routes_blueprint.route("/<int:id>", methods=["GET"])
+def get_by_id(id):
+    try:
+        post = Post.query.get(id)
+    except BaseException as e:
+        return handle_error(e)
+    if post:
+        return jsonify({"post": post},200)
+    else:
+        return (
+            jsonify({"message":"Error: No Post Located", "status":"404"}, 404)
+        )    
+
 # @post_routes_blueprint.route("/<int:id>", methods=["PUT"])
 # @login_required
 # def modify_post(vote_id):
