@@ -18,4 +18,9 @@ def get_all_posts():
         all_posts = Post.query().all()
     except BaseException as e:
         return handle_error(e)
-    return jsonify({"posts": all_posts},200)
+    if all_posts:
+        return jsonify({"posts": [post.to_dict() for post in all_posts]},200)
+    else:
+        return (
+            jsonify({"message":"Error: No Posts Located", "status":"404"}, 404)
+        )
