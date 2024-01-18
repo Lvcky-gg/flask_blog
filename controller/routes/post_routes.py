@@ -40,13 +40,13 @@ def get_by_id(id):
 
 @post_routes_blueprint.route("/<int:id>", methods=["PUT"])
 @login_required
-def modify_post(vote_id):
+def modify_post(id):
     try:
         post = Post.query.get(id)
     except BaseException as e:
         return handle_error(e)
     if post:
-        if int(post.user.id) == int(session["__user_id"]):
+        if int(post.user_id) == int(session["__user_id"]):
             # come look at this later
             post.title = request.json
             post.body = request.json
@@ -66,7 +66,7 @@ def modify_post(vote_id):
     """
 # @post_routes_blueprint.route("/<int:id>", methods=["DELETE"])
 # @login_required
-# def delete_post(vote_id):
+# def delete_post(id):
     """
     todo
     """
