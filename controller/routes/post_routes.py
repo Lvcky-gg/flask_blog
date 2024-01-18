@@ -72,9 +72,7 @@ def delete_post(id):
 
     else:
         return jsonify({"message":"Post not found", "status":404}),404
-    """
-    todo
-    """
+
 
 @post_routes_blueprint.route("/", methods=["POST"])
 @login_required
