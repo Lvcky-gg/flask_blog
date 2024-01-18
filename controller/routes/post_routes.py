@@ -48,8 +48,8 @@ def modify_post(id):
     if post:
         if int(post.user_id) == int(session["__user_id"]):
             # come look at this later
-            post.title = request.json
-            post.body = request.json
+            post.title = request.json.get("title")
+            post.body = request.json.get("body")
             db.session.commit()
             return jsonify(post.to_dict(), 200)
         else:
@@ -58,12 +58,6 @@ def modify_post(id):
         return jsonify({"message":"Post could not be found", "status code":404},404)
 
 
-
-
-
-    """
-    todo
-    """
 # @post_routes_blueprint.route("/<int:id>", methods=["DELETE"])
 # @login_required
 # def delete_post(id):
