@@ -50,6 +50,7 @@ def modify_post(id):
             # come look at this later
             post.title = request.json.get("title")
             post.body = request.json.get("body")
+            post.updated_at = datetime.now()
             db.session.commit()
             return jsonify(post.to_dict()), 200
         else:
