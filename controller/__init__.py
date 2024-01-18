@@ -8,6 +8,7 @@ from model import db, User
 # from .seeds import seed_commands
 from .config import Config
 from .routes.auth_routes import auth_routes
+from .routes.post_routes import post_routes_blueprint
 
 
 def create_app():
@@ -23,6 +24,8 @@ def create_app():
     # app.cli.add_command(seed_commands)
     app.config.from_object(Config)
     app.register_blueprint(auth_routes, url_prefix="/api/auth")
+    app.register_blueprint(post_routes_blueprint, url_prefix="/api/posts")
+
 
     db.init_app(app)
     Migrate(app, db)

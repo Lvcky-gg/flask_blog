@@ -8,7 +8,7 @@ class Post(db.Model):
         __table_args = {"schema": SCHEMA}
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), nullable=False)
-    body = db.Column(db.String(), nallable=False)
+    body = db.Column(db.String(), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(
