@@ -24,3 +24,28 @@ def get_all_posts():
         return (
             jsonify({"message":"Error: No Posts Located", "status":"404"}, 404)
         )
+    
+# @post_routes_blueprint.route("/<int:id>", methods=["GET"])
+# def get_by_id(id):
+    """
+    todo
+    """
+# @post_routes_blueprint.route("/<int:id>", methods=["PUT"])
+# @login_required
+# def modify_post(vote_id):
+    """
+    todo
+    """
+# @post_routes_blueprint.route("/<int:id>", methods=["DELETE"])
+# @login_required
+# def delete_post(vote_id):
+    """
+    todo
+    """
+
+# @post_routes_blueprint.route("/", methods=["POST"])
+# @login_required
+# def create_post():
+    """
+    todo
+    """
