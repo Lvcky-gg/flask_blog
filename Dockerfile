@@ -9,4 +9,4 @@ RUN pip install psycopg2-binary
 
 COPY . /app/
 
-CMD /bin/sh -c 'echo "Please wait . . ." && sleep 10  && gunicorn --bind 0.0.0.0:5000 "controller:create_app()"'
+CMD /bin/sh -c 'echo "Please wait . . ." && sleep 10  && gunicorn --bind 0.0.0.0:5000 "controller:app"'
