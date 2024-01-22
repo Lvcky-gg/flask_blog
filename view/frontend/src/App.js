@@ -1,7 +1,5 @@
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/index";
-// import "./assets/main.css";
 
 import React, { useState, useEffect } from "react";
 
