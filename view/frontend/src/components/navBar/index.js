@@ -33,6 +33,10 @@ const NavBar = () => {
           text-whiteBackground       
         hover:animate-pulse
         hover:cursor-pointer"
+          onClick={(e) => {
+            e.preventDefault();
+            nav("/login");
+          }}
         >
           Login
         </button>
@@ -41,7 +45,12 @@ const NavBar = () => {
         text-whiteBackground
         hover:animate-pulse
         hover:cursor-pointer
+
         "
+          onClick={(e) => {
+            e.preventDefault();
+            nav("/signup");
+          }}
         >
           Signup
         </button>
