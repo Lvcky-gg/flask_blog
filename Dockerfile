@@ -1,7 +1,11 @@
-FROM python:3.9
-# FROM node:16
+FROM node:16 as build 
+WORKDIR /view
+COPY view/frontend /view/
+RUN npm install
+RUN npm run build
 
-RUN apt-get update || : && apt-get install python3.9 -y
+FROM python:3.9
+
 
 
 WORKDIR /app
@@ -11,9 +15,12 @@ COPY requirements.txt /app/
 
 
 
+
 RUN pip install -r requirements.txt
 RUN pip install psycopg2-binary
 
-COPY . /app/
+COPY . /app/ 
 
-CMD /bin/sh -c 'echo "Please wait . . ." && sleep 10 && cd ./view/frontend && npm install && npm run build && cd ../../  && gunicorn --bind 0.0.0.0:5000 "controller:app"'
+COPY --from=build /view/build /app/view/frontend/build
+
+CMD /bin/sh -c 'echo "Please wait . . ." && sleep 10  && gunicorn --bind 0.0.0.0:5000 "controller:app"'
