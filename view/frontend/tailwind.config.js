@@ -10,11 +10,11 @@ export default {
         xl: "1440px",
       },
       colors: {
-        black: "#001b2e",
+        text: "#001b2e",
         lightBlue: "#537692",
         slate: "#b3cde4",
         blue: "#1d3f58",
-        white: "#eef3f9",
+        whiteBackground: "#eef3f9",
       },
       fontFamily: {
         sans: ["source-code-pro", "monospace"],
