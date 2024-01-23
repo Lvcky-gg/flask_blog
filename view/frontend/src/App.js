@@ -9,6 +9,7 @@ import Login from "./pages/login";
 import AllPosts from "./pages/allPosts";
 import Post from "./pages/specificPost";
 import MakePost from "./pages/makePost";
+import NavBar from "./components/navBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <>
+      <NavBar />
       {isLoaded && (
         <Routes>
           <Route path="/" element={<Home />} />
