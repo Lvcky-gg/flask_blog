@@ -27,6 +27,25 @@ const NavBar = () => {
         Home
       </h1>
       <div className="flex-grow px-4 max-w-xl mx-auto"></div>
+      <div className="pr-12">
+        <button
+          className="p-8  
+          text-whiteBackground       
+        hover:animate-pulse
+        hover:cursor-pointer"
+        >
+          Login
+        </button>
+        <button
+          className="p-8
+        text-whiteBackground
+        hover:animate-pulse
+        hover:cursor-pointer
+        "
+        >
+          Signup
+        </button>
+      </div>
     </header>
   );
 };
