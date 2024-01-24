@@ -31,11 +31,11 @@ const SignUp = () => {
     <div className="flex flex-col m-auto w-9/12 mt-12 text-xl">
       {/* <h1 className="w-fit p-2 m-auto">Sign Up</h1> */}
       <form onSubmit={handleSubmit}>
-        <ul className="w-fit pt-2 m-auto">
+        {/* <ul className="w-fit pt-2 m-auto">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
-        </ul>
+        </ul> */}
         <div className="w-fit p-2 m-auto flex flex-col">
           <label className="w-fit p-12 m-auto">Email</label>
           <input

@@ -31,7 +31,7 @@ const Login = () => {
     if (sessionUser) {
       <Navigate to="/" />;
     }
-    // clean errors if modal closed
+
     const clearErrorMessages = () => {
       dispatch(clearErrors());
     };
