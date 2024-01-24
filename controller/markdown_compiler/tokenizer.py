@@ -14,7 +14,7 @@ def seperate_to_token(str):
         if str[i][0] == "\n":
             str[i] = str[i][1::]
 
-        
+
         if str[i][0] == "#":
             returnArr.append(handle_hashtags(str[i], 0))
         # handle this in another function to check if first is equal to a number
@@ -29,13 +29,18 @@ def seperate_to_token(str):
             val = str[i]
             returnArr.append({3:val, "token":"---"})
         elif str[i][0:2] == "![":
-            print(str[i])
+            # handle later
             pass
         elif str[i][0] == "[":
             pass
-        elif str[i][0::2] == "   ":
+        elif str[i][0:3] == "   ":
+            # handle later
             pass
-    # print(returnArr)  
+        elif str[i][0:3] == "```":
+            val = str[i][3:-3]
+            # print(val)
+            returnArr.append({len(val):val, "token":"```"})
+    print(returnArr)  
 
 def handle_hashtags(str, count):
     if str[0] == "#":
@@ -47,5 +52,5 @@ def handle_hashtags(str, count):
 
 tokenize_main(
     """
-# h1,~## h2,~### h3,~#### h4,~##### h5,~###### h6,~1. one,~2. two,~3. three,~    1. test,~    2. test,~    3. test,~- one,~- two,~- three,~    - one,~    - two,~    - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)
+``` console.log("hello world""); ```,~# h1,~## h2,~### h3,~#### h4,~##### h5,~###### h6,~1. one,~2. two,~3. three,~    1. test,~    2. test,~    3. test,~- one,~- two,~- three,~    - one,~    - two,~    - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)
               """)
