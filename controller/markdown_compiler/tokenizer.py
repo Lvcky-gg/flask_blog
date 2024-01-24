@@ -29,10 +29,11 @@ def seperate_to_token(str):
             val = str[i]
             returnArr.append({"value":0, "token":"---"})
         elif str[i][0:2] == "![":
-            # handle later
-            pass
+            returnArr.append(handle_link(str[i][1::], True))
+            
+
         elif str[i][0] == "[":
-            returnArr.append(handle_link(str[i]))
+            returnArr.append(handle_link(str[i],False))
         elif str[i][0:3] == "   ":
             # handle later
             pass
@@ -47,16 +48,17 @@ def handle_hashtags(str, count):
         return handle_hashtags(str, count+1)
     return {"len":count, "value":str.strip(), "token":"#"}
 
-def handle_link(str):
+def handle_link(str, bool):
     val=str[1::].split("](")
     val2 = val[1][:-1]
-    return {"value":val[0],"link":val2, "token":"[]()"}
+    if bool:
+        token = "![]()"
+    else:
+        token = "[]()"
+    return {"value":val[0],"link":val2, "token":token}
     
 
 
     
 
-tokenize_main(
-    """
-``` console.log("hello world""); ```,~# h1,~## h2,~### h3,~#### h4,~##### h5,~###### h6,~1. one,~2. two,~3. three,~    1. test,~    2. test,~    3. test,~- one,~- two,~- three,~    - one,~    - two,~    - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)
-              """)
+tokenize_main("""``` console.log("hello world") ```,~# h1,~## h2,~### h3,~#### h4,~##### h5,~###### h6,~1. one,~2. two,~3. three,~    1. test,~    2. test,~    3. test,~- one,~- two,~- three,~    - one,~    - two,~    - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)""")
