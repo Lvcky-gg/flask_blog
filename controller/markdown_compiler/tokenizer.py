@@ -17,13 +17,13 @@ def seperate_to_token(str):
 
         if str[i][0] == "#":
             returnArr.append(handle_hashtags(str[i], 0))
-        elif str[i][0].isdigit() and str[i][0] != "!":
-            val = str[i][0]
-            val_2 = str[i][3::]
-            returnArr.append({"value":val_2, "token":f'{val}.'})
-        elif str[i][0] == "-" and str[i][1] != "-":
-            val =str[i][2::]
-            returnArr.append({"value":val, "token":"-"})
+        # elif str[i][0].isdigit() and str[i][0] != "!":
+        #     val = str[i][0]
+        #     val_2 = str[i][3::]
+        #     returnArr.append({"value":val_2, "token":f'{val}.'})
+        # elif str[i][0] == "-" and str[i][1] != "-":
+        #     val =str[i][2::]
+        #     returnArr.append({"value":val, "token":"-"})
         elif str[i][0::] == "---":
             val = str[i]
             returnArr.append({"value":0, "token":"---"})
@@ -31,7 +31,7 @@ def seperate_to_token(str):
             returnArr.append(handle_link(str[i][1::], True))
         elif str[i][0] == "[":
             returnArr.append(handle_link(str[i],False))
-        elif str[i][0:3] == "   ":
+        elif str[i][0:3] == "   " or str[i][0] == "-" and str[i][1] != "-" or str[i][0].isdigit() and str[i][0] != "!":
             returnArr.append(handle_whitespace(str[i],0))
         elif str[i][0:3] == "```":
             val = str[i][4:-3]

@@ -12,10 +12,8 @@ def parser(string):
                 pass
             elif val["token"] == "```":
                 retArr.append(f'<code>{val["value"]}<code/>')
-
             elif val["token"] == "#":
                 retArr.append(f'<h{val["len"]}>{val["value"]}<h{val["len"]}/>')
-                pass
             elif val["token"] == "-":
                 pass
             elif val["token"] == "---":
@@ -24,8 +22,8 @@ def parser(string):
                 pass
             elif val["token"] == "![]()":
                 pass
-            # print(arr[i])
-    print(retArr)
+            print(arr[i])
+    print("".join(str(x + " ") for x in retArr))
 
 
 
