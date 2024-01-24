@@ -2,15 +2,19 @@ from tokenizer import tokenize_main
 
 def parser(string):
     arr = tokenize_main(string)
+    retArr = []
 
     for i in range(len(arr)):
         val = arr[i]
         if val["token"]:
             if val["token"][0].isdigit() and val["token"][0] != "!":
+                # print(val["value"])
                 pass
             elif val["token"] == "```":
-                pass
+                retArr.append(f'<code>{val["value"]}<code/>')
+
             elif val["token"] == "#":
+                retArr.append(f'<h{val["len"]}>{val["value"]}<h{val["len"]}/>')
                 pass
             elif val["token"] == "-":
                 pass
@@ -20,8 +24,8 @@ def parser(string):
                 pass
             elif val["token"] == "![]()":
                 pass
-            
-            print(val["token"])
+            # print(arr[i])
+    print(retArr)
 
 
 
