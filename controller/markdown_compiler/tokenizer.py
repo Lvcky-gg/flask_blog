@@ -17,7 +17,6 @@ def seperate_to_token(str):
 
         if str[i][0] == "#":
             returnArr.append(handle_hashtags(str[i], 0))
-        # handle this in another function to check if first is equal to a number
         elif str[i][0].isdigit() and str[i][0] != "!":
             val = str[i][0]
             val_2 = str[i][3::]
@@ -30,12 +29,12 @@ def seperate_to_token(str):
             returnArr.append({"value":0, "token":"---"})
         elif str[i][0:2] == "![":
             returnArr.append(handle_link(str[i][1::], True))
-            
-
         elif str[i][0] == "[":
             returnArr.append(handle_link(str[i],False))
         elif str[i][0:3] == "   ":
-            # handle later
+            returnArr.append(handle_whitespace(str[i],0))
+
+            
             pass
         elif str[i][0:3] == "```":
             val = str[i][4:-3]
@@ -48,6 +47,18 @@ def handle_hashtags(str, count):
         return handle_hashtags(str, count+1)
     return {"len":count, "value":str.strip(), "token":"#"}
 
+def handle_whitespace(str, count):
+
+    if str[0:3] != "   ":
+        if str[0].isdigit():
+            val = f'{str[0]}.'
+        else:
+            val = "-"
+        return {"value":str[2::], "count":count, "token":val }
+    else:
+        str = str[3::]
+        return handle_whitespace(str, count+1)
+
 def handle_link(str, bool):
     val=str[1::].split("](")
     val2 = val[1][:-1]
@@ -56,9 +67,10 @@ def handle_link(str, bool):
     else:
         token = "[]()"
     return {"value":val[0],"link":val2, "token":token}
-    
-
 
     
 
-tokenize_main("""``` console.log("hello world") ```,~# h1,~## h2,~### h3,~#### h4,~##### h5,~###### h6,~1. one,~2. two,~3. three,~    1. test,~    2. test,~    3. test,~- one,~- two,~- three,~    - one,~    - two,~    - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)""")
+
+    
+
+tokenize_main("""``` console.log("hello world") ```,~# h1,~## h2,~### h3,~#### h4,~##### h5,~###### h6,~1. one,~2. two,~3. three,~   1. test,~      1. test,~   2. test,~   3. test,~- one,~- two,~- three,~   - one,~   - two,~   - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)""")
