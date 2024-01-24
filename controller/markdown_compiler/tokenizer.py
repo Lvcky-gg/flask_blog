@@ -25,23 +25,27 @@ def seperate_to_token(str, returnArr = []):
         returnArr.append(handle_link(str[0][1::], True))
     elif str[0][0] == "[":
         returnArr.append(handle_link(str[0],False))
-    elif str[0][0:3] == "   " or str[0][0] == "-" and str[0][1] != "-" or str[0][0].isdigit() and str[0][0] != "!": 
-        token = handle_whitespace(str[0],0)
-        handle_recurse(str)
+    # elif str[0][0:3] == "   " or str[0][0] == "-" and str[0][1] != "-" or str[0][0].isdigit() and str[0][0] != "!": 
+        # token = handle_whitespace(str[0],0)
+        # handle_recurse(str,[token])
     elif str[0][0:3] == "```":
         val = str[0][4:-3]
         returnArr.append({"value":val, "token":"```"})
     
     return seperate_to_token(str[1::], returnArr) 
-def handle_recurse(str):
-    if len(str) > 1:
-        if str[1][0:3] == "   " or str[1][0] == "-" and str[1][1] != "-" or str[1][0].isdigit() and str[1][0] != "!":
-            print(str)
-    if len(str):
-        str.pop()
-    else:
-        return
-    return handle_recurse(str)
+# def handle_recurse(str,arr):
+
+#     if len(str) > 1:
+#         if arr[0]["count"] == handle_whitespace(str,0)["count"]:
+#             arr.append(handle_whitespace(str[0],0))
+#         if str[1][0:3] == "   " or str[1][0] == "-" and str[1][1] != "-" or str[1][0].isdigit() and str[1][0] != "!":
+#             # print(str)
+#             print(arr)
+#     if len(str):
+#         str.pop()
+#     else:
+#         return
+#     return handle_recurse(str, arr)
 def handle_hashtags(str, count):
     # print(str)
     if str[0] == "#":
@@ -49,18 +53,18 @@ def handle_hashtags(str, count):
         return handle_hashtags(str, count+1)
     return {"len":count, "value":str, "token":"#"}
 
-def handle_whitespace(str, count):
+# def handle_whitespace(str, count):
 
-    if str[0:3] != "   ":
-        if str[0].isdigit():
-            val = f'{str[0]}.'
-        else:
-            val = "-"
+#     if str[0:3] != "   ":
+#         if str[0].isdigit():
+#             val = f'{str[0]}.'
+#         else:
+#             val = "-"
 
-        return {"value":str[2::], "count":count, "token":val }
-    else:
-        str = str[3::]
-        return handle_whitespace(str, count+1)
+#         return {"value":str[2::], "count":count, "token":val }
+#     else:
+#         str = str[3::]
+#         return handle_whitespace(str, count+1)
 
 def handle_link(str, bool):
     val=str[1::].split("](")
