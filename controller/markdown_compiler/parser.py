@@ -12,7 +12,7 @@ def parser(string):
                 pass
             elif val["token"] == "```":
                 retArr.append(f'<code>{val["value"]}<code/>')
-            elif val["token"] == "#":
+            elif val["token"] == "#" and val["len"] <= 6:
                 retArr.append(f'<h{val["len"]}>{val["value"]}<h{val["len"]}/>')
             # elif val["token"] == "-":
             #     pass
