@@ -32,14 +32,12 @@ def seperate_to_token(str):
             # handle later
             pass
         elif str[i][0] == "[":
-            print(handle_link(str[i]))
-            pass
+            returnArr.append(handle_link(str[i]))
         elif str[i][0:3] == "   ":
             # handle later
             pass
         elif str[i][0:3] == "```":
             val = str[i][4:-3]
-            # print(val)
             returnArr.append({"value":val, "token":"```"})
     print(returnArr)  
 
