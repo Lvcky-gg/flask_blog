@@ -26,13 +26,7 @@ def parser(string):
 
 
 def validate_token(dic, count, str):
-    
-    if(dic["token"] == "-"):
-        str+=f'<li>{dic["value"].strip()}<li/>'
-        pass
-    elif(dic["token"][0].isdigit()):
-        str+=f'<li>{dic["value"].strip()}<li/>'
-        pass
+    str+=f'<li>{dic["value"].strip()}<li/>'
     print(dic)
     print(str)
 
