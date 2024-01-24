@@ -29,23 +29,23 @@ def seperate_to_token(str):
             val = str[i]
             returnArr.append({3:val, "token":"---"})
         elif str[i][0:2] == "![":
-            # print(str[i])
+            print(str[i])
             pass
         elif str[i][0] == "[":
             pass
         elif str[i][0::2] == "   ":
             pass
-    print(returnArr)  
+    # print(returnArr)  
 
 def handle_hashtags(str, count):
     if str[0] == "#":
         str = str[1::]
         return handle_hashtags(str, count+1)
-    return {count: str, "token":"#"}
+    return {count: str.strip(), "token":"#"}
 
     
 
 tokenize_main(
     """
-# h1,~# # h2,~# ## h3,~# ### h4,~# #### h5,~# ##### h6,~1. one,~2. two,~3. three,~    1. test,~    2. test,~    3. test,~- one,~- two,~- three,~    - one,~    - two,~    - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)
+# h1,~## h2,~### h3,~#### h4,~##### h5,~###### h6,~1. one,~2. two,~3. three,~    1. test,~    2. test,~    3. test,~- one,~- two,~- three,~    - one,~    - two,~    - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)
               """)
