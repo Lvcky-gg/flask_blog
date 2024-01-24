@@ -33,13 +33,10 @@ def seperate_to_token(str):
             returnArr.append(handle_link(str[i],False))
         elif str[i][0:3] == "   ":
             returnArr.append(handle_whitespace(str[i],0))
-
-            
-            pass
         elif str[i][0:3] == "```":
             val = str[i][4:-3]
             returnArr.append({"value":val, "token":"```"})
-    print(returnArr)  
+    return returnArr 
 
 def handle_hashtags(str, count):
     if str[0] == "#":
@@ -73,4 +70,3 @@ def handle_link(str, bool):
 
     
 
-tokenize_main("""``` console.log("hello world") ```,~# h1,~## h2,~### h3,~#### h4,~##### h5,~###### h6,~1. one,~2. two,~3. three,~   1. test,~      1. test,~   2. test,~   3. test,~- one,~- two,~- three,~   - one,~   - two,~   - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)""")
