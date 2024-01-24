@@ -7,22 +7,22 @@ def parser(string):
     for i in range(len(arr)):
         val = arr[i]
         if val["token"]:
-            if val["token"][0].isdigit() and val["token"][0] != "!":
-                # print(val["value"])
+            if val["token"][0].isdigit() and val["token"][0] != "!" or val["token"] == "-":
+                # print(val)
                 pass
             elif val["token"] == "```":
                 retArr.append(f'<code>{val["value"]}<code/>')
             elif val["token"] == "#":
                 retArr.append(f'<h{val["len"]}>{val["value"]}<h{val["len"]}/>')
-            elif val["token"] == "-":
-                pass
+            # elif val["token"] == "-":
+            #     pass
             elif val["token"] == "---":
-                pass
+                retArr.append("<hr/>")
             elif val["token"] == "[]()":
-                pass
+                retArr.append(f'<a alt="{val["value"]}" href="{val["link"]}"/>')
             elif val["token"] == "![]()":
-                pass
-            print(arr[i])
+                retArr.append(f'<image alt="{val["value"]} src="{val["link"]}"/>')
+            # print(arr[i])
     print("".join(str(x + " ") for x in retArr))
 
 

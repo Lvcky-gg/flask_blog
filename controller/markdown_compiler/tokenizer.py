@@ -1,4 +1,4 @@
-
+# NEED TO ADD Paragraph and Table
 def tokenize_main(string):
     delimiter = ",~"
     string_literal = split_on_delimiter(string, delimiter)
