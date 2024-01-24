@@ -8,14 +8,13 @@ def parser(string):
         val = arr[i]
         if val["token"]:
             if val["token"][0].isdigit() and val["token"][0] != "!" or val["token"] == "-":
-                # print(val)
+                validate_token(val,val["count"],"")
+                
                 pass
             elif val["token"] == "```":
                 retArr.append(f'<code>{val["value"]}<code/>')
             elif val["token"] == "#" and val["len"] <= 6:
                 retArr.append(f'<h{val["len"]}>{val["value"]}<h{val["len"]}/>')
-            # elif val["token"] == "-":
-            #     pass
             elif val["token"] == "---":
                 retArr.append("<hr/>")
             elif val["token"] == "[]()":
@@ -24,6 +23,18 @@ def parser(string):
                 retArr.append(f'<image alt="{val["value"]} src="{val["link"]}"/>')
             # print(arr[i])
     print("".join(str(x + " ") for x in retArr))
+
+
+def validate_token(dic, count, str):
+    
+    if(dic["token"] == "-"):
+        str+=f'<li>{dic["value"].strip()}<li/>'
+        pass
+    elif(dic["token"][0].isdigit()):
+        str+=f'<li>{dic["value"].strip()}<li/>'
+        pass
+    print(dic)
+    print(str)
 
 
 
