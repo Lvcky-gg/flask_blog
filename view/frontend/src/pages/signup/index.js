@@ -2,31 +2,47 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { signUp } from "../../store/session";
+import validateInput from "../../utils/validateInput";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const validationErrors = useSelector(
+    (state) => state.session.validationErrors
+  );
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-
-  if (sessionUser) return <Navigate to="/" />;
+  const [inputValidate, setInputValidate] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      const data = await dispatch(signUp(username, email, password));
-      if (data) {
-        setErrors(data);
-      }
+    const errors = validateInput({
+      email,
+      password,
+      username,
+      confirmPassword,
+    });
+    if (errors.length) {
+      setInputValidate(errors);
     } else {
-      setErrors([
-        "Confirm Password field must be the same as the Password field",
-      ]);
+      setInputValidate([]);
+      dispatch(signUp({ username, email, password }));
     }
   };
+
+  if (sessionUser) return <Navigate to="/" />;
+  let errorObject = [];
+  if (validationErrors) {
+    errorObject = Object.values(
+      validationErrors.reduce((acc, error) => {
+        const [key, value] = error.split(" : ");
+        acc[key] = value;
+        return acc;
+      }, {})
+    );
+  }
   return (
     <div className="flex flex-col m-auto w-9/12 mt-12 text-xl">
       {/* <h1 className="w-fit p-2 m-auto">Sign Up</h1> */}
@@ -78,6 +94,27 @@ const SignUp = () => {
           </button>
         </div>
       </form>
+
+      <ul className="">
+        {inputValidate &&
+          inputValidate.map((error, idx) => (
+            <li key={idx} className="p-12 m-auto">
+              <span style={{ color: "red", padding: "5px" }}>
+                <i className="fas fa-exclamation-circle"></i>
+              </span>
+              {error}
+            </li>
+          ))}
+        {errorObject &&
+          errorObject.map((error, idx) => (
+            <li key={idx}>
+              <span style={{ color: "red", padding: "5px" }}>
+                <i className="fas fa-exclamation-circle"></i>
+              </span>
+              {error}
+            </li>
+          ))}
+      </ul>
     </div>
   );
 };
