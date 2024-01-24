@@ -32,21 +32,29 @@ def seperate_to_token(str):
             # handle later
             pass
         elif str[i][0] == "[":
+            print(handle_link(str[i]))
             pass
         elif str[i][0:3] == "   ":
             # handle later
             pass
         elif str[i][0:3] == "```":
-            val = str[i][3:-3]
+            val = str[i][4:-3]
             # print(val)
-            returnArr.append({len(val):val, "token":"```"})
-    print(returnArr)  
+            returnArr.append({"code":val, "token":"```"})
+    # print(returnArr)  
 
 def handle_hashtags(str, count):
     if str[0] == "#":
         str = str[1::]
         return handle_hashtags(str, count+1)
     return {count: str.strip(), "token":"#"}
+
+def handle_link(str):
+    val=str[1::].split("](")
+    val2 = val[1][:-1]
+    return {val[0]:val2, "token":"[]()"}
+    
+
 
     
 
