@@ -55,7 +55,7 @@ export const getAllPosts = createAsyncThunk(
 
 export const getPost = createAsyncThunk(
   "post/getPost",
-  async ({ postId }, { rejectWithValue }) => {
+  async ( postId , { rejectWithValue }) => {
     const res = await csrfFetch(`/api/posts/${postId}`, {
       headers: {
         "Content-Type": "application/json",
