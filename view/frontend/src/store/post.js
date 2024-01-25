@@ -18,9 +18,17 @@ export const postSlice = createSlice({
       .addCase(getAllPosts.fulfilled, (state, action) => {
         state.allPosts = action.payload;
         state.error = null;
-        state.validationErrors = action.payload;
+        state.displayedPosts = action.payload;
       })
       .addCase(getAllPosts.rejected, (state, action) => {
+        state.validationErrors = action.payload.errors;
+        state.error = action.payload.errors;
+      })
+      .addCase(getPost.fulfilled, (state, action) => {
+        state.error = null;
+        state.displayedPosts = action.payload;
+      })
+      .addCase(getPost.rejected, (state, action) => {
         state.validationErrors = action.payload.errors;
         state.error = action.payload.errors;
       });
@@ -42,6 +50,24 @@ export const getAllPosts = createAsyncThunk(
       return rejectWithValue(await res.json());
     }
     return data.posts;
+  }
+);
+
+export const getPost = createAsyncThunk(
+  "post/getPost",
+  async ({ postId }, { rejectWithValue }) => {
+    const res = await csrfFetch(`/api/posts/${postId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      return rejectWithValue(await res.json());
+    }
+    return data;
   }
 );
 
