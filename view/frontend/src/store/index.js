@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { loadingMiddleware } from "./loader";
 import sessionReducer from "./session";
+import postReducer from "./post";
 
 import loadingReducer from "./loader";
 
@@ -14,6 +15,7 @@ const store = configureStore({
   reducer: {
     loading: loadingReducer,
     session: sessionReducer,
+    posts: postReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(middleware),
