@@ -31,6 +31,16 @@ export const postSlice = createSlice({
       .addCase(getPost.rejected, (state, action) => {
         state.validationErrors = action.payload.errors;
         state.error = action.payload.errors;
+      })
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.allPosts.push(action.payload);
+        state.displayedPosts.push(action.payload);
+        state.error = null;
+        state.validationErrors = null;
+      })
+      .addCase(createPost.rejected, (state, action) => {
+        state.validationErrors = action.payload.errors;
+        state.error = action.payload.errors;
       });
   },
 });
@@ -55,7 +65,7 @@ export const getAllPosts = createAsyncThunk(
 
 export const getPost = createAsyncThunk(
   "post/getPost",
-  async ( postId , { rejectWithValue }) => {
+  async (postId, { rejectWithValue }) => {
     const res = await csrfFetch(`/api/posts/${postId}`, {
       headers: {
         "Content-Type": "application/json",
@@ -68,6 +78,27 @@ export const getPost = createAsyncThunk(
       return rejectWithValue(await res.json());
     }
     return data;
+  }
+);
+
+export const createPost = createAsyncThunk(
+  "posts/createPosts",
+  async ({ title, description }, { rejectWithValue }) => {
+    try {
+      const res = await axios.post(
+        "/api/posts",
+        JSON.stringify({ title, description }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "XSRF-Token": Cookies.get("XSRF-TOKEN"),
+          },
+        }
+      );
+      if (res.data) return res.data;
+    } catch (e) {
+      return rejectWithValue({ errors: error.response.data.errors });
+    }
   }
 );
 
