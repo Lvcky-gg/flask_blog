@@ -22,5 +22,6 @@ RUN pip install psycopg2-binary
 COPY . /app/ 
 
 COPY --from=build /view/build /app/view/frontend/build
+EXPOSE 5000
 
 CMD /bin/sh -c 'echo "Please wait . . ." && sleep 10  && gunicorn --bind 0.0.0.0:5000 "controller:app"'

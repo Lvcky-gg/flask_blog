@@ -14,6 +14,9 @@ post_routes_blueprint = Blueprint("posts", __name__)
 
 @post_routes_blueprint.route("/", methods=["GET"])
 def get_all_posts():
+    """
+    get all Posts
+    """
     try:
         all_posts = Post.query.all()
     except BaseException as e:
@@ -27,12 +30,15 @@ def get_all_posts():
     
 @post_routes_blueprint.route("/<int:id>", methods=["GET"])
 def get_by_id(id):
+    """
+    get a Post by id
+    """
     try:
         post = Post.query.get(id)
     except BaseException as e:
         return handle_error(e)
     if post:
-        return jsonify({"post": post}),200
+        return jsonify({"post": post.to_dict()}),200
     else:
         return (
             jsonify({"message":"Error: No Post Located", "status":"404"}), 404
@@ -41,6 +47,9 @@ def get_by_id(id):
 @post_routes_blueprint.route("/<int:id>", methods=["PUT"])
 @login_required
 def modify_post(id):
+    """
+    modify a Post
+    """
     try:
         post = Post.query.get(id)
     except BaseException as e:
@@ -62,6 +71,9 @@ def modify_post(id):
 @post_routes_blueprint.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_post(id):
+    """
+    delete a Post
+    """
     post = Post.query.get(id)
     if post:
         if int(post.user_id) == int(session["__user_id"]):
@@ -78,6 +90,9 @@ def delete_post(id):
 @post_routes_blueprint.route("/", methods=["POST"])
 @login_required
 def create_post():
+    """
+    create a Post
+    """
     try:
         if request.json != "":
             post = Post(
