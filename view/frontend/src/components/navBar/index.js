@@ -47,6 +47,18 @@ const NavBar = () => {
           >
             Logout
           </button>
+          <button
+            className="p-8  
+             text-whiteBackground       
+              hover:animate-pulse
+              hover:cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              nav("/posts/create");
+            }}
+          >
+            Create
+          </button>
         </div>
       ) : (
         <div className="pr-12">
