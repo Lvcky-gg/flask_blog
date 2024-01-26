@@ -10,12 +10,11 @@ import AllPosts from "./pages/allPosts";
 import Post from "./pages/specificPost";
 import MakePost from "./pages/makePost";
 import NavBar from "./components/navBar";
-import { getAllPosts, getPost } from "./store/post";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log(dispatch(getPost(1)));
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);

@@ -1,8 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/session";
 
 const NavBar = () => {
   const nav = useNavigate();
+  const sessionUser = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
+
   return (
     <header
       className="
@@ -27,34 +32,52 @@ const NavBar = () => {
         Home
       </h1>
       <div className="flex-grow px-4 max-w-xl mx-auto"></div>
-      <div className="pr-12">
-        <button
-          className="p-8  
+      {sessionUser ? (
+        <div className="pr-12">
+          <button
+            className="p-8  
+             text-whiteBackground       
+              hover:animate-pulse
+              hover:cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(logout());
+              nav("/");
+            }}
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div className="pr-12">
+          <button
+            className="p-8  
           text-whiteBackground       
         hover:animate-pulse
         hover:cursor-pointer"
-          onClick={(e) => {
-            e.preventDefault();
-            nav("/login");
-          }}
-        >
-          Login
-        </button>
-        <button
-          className="p-8
+            onClick={(e) => {
+              e.preventDefault();
+              nav("/login");
+            }}
+          >
+            Login
+          </button>
+          <button
+            className="p-8
         text-whiteBackground
         hover:animate-pulse
         hover:cursor-pointer
 
         "
-          onClick={(e) => {
-            e.preventDefault();
-            nav("/signup");
-          }}
-        >
-          Signup
-        </button>
-      </div>
+            onClick={(e) => {
+              e.preventDefault();
+              nav("/signup");
+            }}
+          >
+            Signup
+          </button>
+        </div>
+      )}
     </header>
   );
 };
