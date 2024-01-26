@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div className="flex flex-col m-auto w-9/12 mt-12 ">
       {posts.map(({ title, body, id }) => (
-        <Card key={id} title={title} body={body} />
+        <Card id={id} key={id} title={title} body={body} />
       ))}
     </div>
   );
