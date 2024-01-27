@@ -20,7 +20,7 @@ const Post = () => {
           <h1 className="text-text w-fit m-auto text-4xl ml-9/12">
             {post.title}
           </h1>
-          <p className="text-text w-fit m-auto pt-40">{post.body} </p>
+          <p className="text-text w-fit m-auto pt-40 text-xl">{post.body} </p>
         </>
       )}
     </div>
