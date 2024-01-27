@@ -5,15 +5,15 @@ const Card = ({ body, title, id }) => {
   const nav = useNavigate();
   return (
     <div
-      class="w-9/12 rounded overflow-hidden shadow-lg m-auto hover:cursor-pointer"
+      className="w-9/12 rounded overflow-hidden shadow-lg m-auto hover:cursor-pointer"
       onClick={(e) => {
         e.preventDefault();
         nav(`/posts/${id}`);
       }}
     >
-      <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">{title}</div>
-        <p class="text-gray-700 text-base">{`${body
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">{title}</div>
+        <p className="text-gray-700 text-base">{`${body
           .substring(0, 100)
           .trim()}...`}</p>
       </div>

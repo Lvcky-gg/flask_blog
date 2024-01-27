@@ -18,7 +18,6 @@ export const postSlice = createSlice({
       .addCase(getAllPosts.fulfilled, (state, action) => {
         state.allPosts = action.payload;
         state.error = null;
-        state.displayedPosts = action.payload;
       })
       .addCase(getAllPosts.rejected, (state, action) => {
         state.validationErrors = action.payload.errors;
