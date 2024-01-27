@@ -75,7 +75,7 @@ def handle_link(str, bool):
         token = "[]()"
     return {"value":val[0],"link":val2, "token":token}
 
-tokenize_main("""``` console.log("hello world") ```,~# h1,~## h2,~### h3,~#### h4,~##### h5,~###### h6,~1. one,~2. two,~3. three,~   1. test,~      1. test,~   2. test,~   3. test,~- one,~- two,~- three,~   - one,~   - two,~   - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)""")
+# print(tokenize_main("""``` console.log("hello world") ```,~# h1,~## h2,~### h3,~#### h4,~##### h5,~###### h6,~1. one,~2. two,~3. three,~   1. test,~      1. test,~   2. test,~   3. test,~- one,~- two,~- three,~   - one,~   - two,~   - three,~---,~[title](https://www.johnodonnell.xyz),~![text](image.jpg)"""))
 
     
 
