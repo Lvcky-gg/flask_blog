@@ -9,6 +9,7 @@ from seeds import seed_commands
 from .config import Config
 from .routes.auth_routes import auth_routes
 from .routes.post_routes import post_routes_blueprint
+from .routes.user_routes import user_routes
 
 
 def create_app():
@@ -23,6 +24,7 @@ def create_app():
         return User.query.get(int(id))
     app.cli.add_command(seed_commands)
     app.config.from_object(Config)
+    app.register_blueprint(user_routes, url_prefix="/api/users")
     app.register_blueprint(auth_routes, url_prefix="/api/auth")
     app.register_blueprint(post_routes_blueprint, url_prefix="/api/posts")
 

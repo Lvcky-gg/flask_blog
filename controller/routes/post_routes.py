@@ -55,7 +55,7 @@ def modify_post(id):
     except BaseException as e:
         return handle_error(e)
     if post:
-        if int(post.user_id) == int(session["__user_id"]):
+        if int(post.user_id) == int(session["_user_id"]):
             # come look at this later
             post.title = request.json.get("title")
             post.body = request.json.get("body")
@@ -76,7 +76,7 @@ def delete_post(id):
     """
     post = Post.query.get(id)
     if post:
-        if int(post.user_id) == int(session["__user_id"]):
+        if int(post.user_id) == int(session["_user_id"]):
             Post.query.filter_by(id=id).delete()
             db.session.commit()
             return jsonify({"message":"success"}),200
@@ -93,11 +93,12 @@ def create_post():
     """
     create a Post
     """
+
     try:
         if request.json != "":
 
             post = Post(
-                user_id=int(session["__user_id"]),
+                user_id=int(session["_user_id"]),
                 title = request.json.get("title"),
                 body = request.json.get("body"),
                 created_at = datetime.now(),
