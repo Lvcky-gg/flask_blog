@@ -95,6 +95,7 @@ def create_post():
     """
     try:
         if request.json != "":
+
             post = Post(
                 user_id=int(session["__user_id"]),
                 title = request.json.get("title"),

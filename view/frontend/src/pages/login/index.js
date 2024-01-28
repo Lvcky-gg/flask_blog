@@ -52,7 +52,7 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col m-auto w-9/12 mt-12 text-xl">
+    <div className="flex flex-col m-auto w-9/12 mt-20 text-xl">
       {/* <h1 className="w-fit p-12 m-auto">Log In</h1> */}
       <form onSubmit={handleSubmit}>
         <div className="w-fit p-12 m-auto flex flex-col">
