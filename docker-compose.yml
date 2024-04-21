@@ -9,8 +9,8 @@ services:
         environment:
             FLASK_ENV: 'development'
             FLASK_DEBUG: 'True'
-            SECRET_KEY: 'some_secret_key_here_for_testing12321!@'
-            DATABASE_URL: 'postgresql://postgres:postgres@db:5432/blog'
+            SECRET_KEY: ''
+            DATABASE_URL: ''
             SQLALCHEMY_TRACK_MODIFICATIONS: 'False'
     db:
         image: postgres
